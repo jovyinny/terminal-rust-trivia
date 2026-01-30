@@ -127,7 +127,10 @@ async fn main() -> Result<()> {
     println!("📨 Join request sent, waiting for server response...");
     println!("🎨 Starting UI...\n");
 
-    // Setup terminal
+    // Small delay to ensure messages are visible before switching to TUI
+    tokio::time::sleep(Duration::from_millis(500)).await;
+
+    // Setup terminal - do this AFTER all user input is collected
     enable_raw_mode()?;
     let mut stdout = io::stdout();
     execute!(stdout, EnterAlternateScreen, EnableMouseCapture)?;
