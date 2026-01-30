@@ -50,19 +50,31 @@ async fn send_message(write_half: &mut OwnedWriteHalf, msg: ClientMessage) -> Re
 
 #[tokio::main]
 async fn main() -> Result<()> {
-    // Get server address and player name from command line
-    let args: Vec<String> = std::env::args().collect();
-    
-    if args.len() < 3 {
-        eprintln!("Usage: {} <server_ip:port> <player_name>", args[0]);
-        eprintln!("Example: {} 192.168.1.100:8080 Alice", args[0]);
+    println!("🎮 Rust Rush Trivia Client");
+    println!("==========================\n");
+
+    // Prompt for server address
+    print!("Enter server address (e.g., 192.168.1.100:8080): ");
+    std::io::Write::flush(&mut std::io::stdout())?;
+
+    let mut server_addr = String::new();
+    std::io::stdin().read_line(&mut server_addr)?;
+    let server_addr = server_addr.trim();
+
+    // Prompt for player name
+    print!("Enter your name: ");
+    std::io::Write::flush(&mut std::io::stdout())?;
+
+    let mut player_name = String::new();
+    std::io::stdin().read_line(&mut player_name)?;
+    let player_name = player_name.trim().to_string();
+
+    if server_addr.is_empty() || player_name.is_empty() {
+        eprintln!("Server address and player name are required!");
         std::process::exit(1);
     }
-    
-    let server_addr = &args[1];
-    let player_name = args[2..].join(" ");
-    
-    println!("Connecting to {} as '{}'...", server_addr, player_name);
+
+    println!("\nConnecting to {} as '{}'...", server_addr, player_name);
     
     // Connect to server
     let stream = TcpStream::connect(server_addr).await?;
