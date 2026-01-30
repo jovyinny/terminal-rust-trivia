@@ -2,178 +2,354 @@
   "questions": [
     {
       "id": 1,
-      "text": "What year was Rust 1.0 officially released?",
-      "options": ["2013", "2015", "2017", "2019"],
+      "text": "What is the capital city of Tanzania?",
+      "options": ["Dar es Salaam", "Dodoma", "Arusha", "Mwanza"],
       "correct_index": 1,
-      "category": "rust"
+      "category": "geography"
     },
     {
       "id": 2,
-      "text": "Which company primarily sponsors Rust development?",
-      "options": ["Google", "Mozilla", "Microsoft", "Amazon"],
+      "text": "Which planet is known as the Red Planet?",
+      "options": ["Earth", "Mars", "Jupiter", "Venus"],
       "correct_index": 1,
-      "category": "rust"
+      "category": "general_knowledge"
     },
     {
       "id": 3,
-      "text": "What is Rust's package manager called?",
-      "options": ["npm", "pip", "cargo", "gem"],
-      "correct_index": 2,
-      "category": "rust"
+      "text": "What is the largest ocean on Earth?",
+      "options": ["Atlantic Ocean", "Indian Ocean", "Arctic Ocean", "Pacific Ocean"],
+      "correct_index": 3,
+      "category": "geography"
     },
     {
       "id": 4,
-      "text": "Which keyword is used to define immutable variables in Rust?",
-      "options": ["var", "let", "const", "val"],
-      "correct_index": 1,
-      "category": "rust"
+      "text": "Who invented the light bulb?",
+      "options": ["Nikola Tesla", "Albert Einstein", "Thomas Edison", "Isaac Newton"],
+      "correct_index": 2,
+      "category": "general_knowledge"
     },
     {
       "id": 5,
-      "text": "What is the name of Rust's documentation generator?",
-      "options": ["rustdoc", "docgen", "rdoc", "rustbook"],
-      "correct_index": 0,
-      "category": "rust"
+      "text": "Which continent has the most countries?",
+      "options": ["Asia", "Africa", "Europe", "South America"],
+      "correct_index": 1,
+      "category": "geography"
     },
     {
       "id": 6,
-      "text": "Which async runtime is most commonly used in Rust?",
-      "options": ["async-std", "tokio", "smol", "actix"],
-      "correct_index": 1,
-      "category": "rust"
+      "text": "What is the boiling point of water at sea level?",
+      "options": ["90°C", "95°C", "100°C", "110°C"],
+      "correct_index": 2,
+      "category": "general_knowledge"
     },
     {
       "id": 7,
-      "text": "What does 'RAII' stand for in systems programming?",
-      "options": ["Resource Allocation Is Initialization", "Random Access In Iteration", "Recursive Algorithm Implementation", "Runtime Assertion and Inspection"],
-      "correct_index": 0,
-      "category": "programming"
+      "text": "Mount Kilimanjaro is located in which country?",
+      "options": ["Kenya", "Uganda", "Tanzania", "Rwanda"],
+      "correct_index": 2,
+      "category": "geography"
     },
     {
       "id": 8,
-      "text": "Which of these is NOT a Rust ownership rule?",
-      "options": ["Each value has an owner", "There can be multiple owners", "When the owner goes out of scope, the value is dropped", "There can only be one owner at a time"],
-      "correct_index": 1,
-      "category": "rust"
+      "text": "Which language has the most native speakers worldwide?",
+      "options": ["English", "Spanish", "Mandarin Chinese", "Arabic"],
+      "correct_index": 2,
+      "category": "general_knowledge"
     },
     {
       "id": 9,
-      "text": "What is the default integer type in Rust?",
-      "options": ["i32", "i64", "u32", "isize"],
-      "correct_index": 0,
-      "category": "rust"
+      "text": "Which country is the smallest in the world by land area?",
+      "options": ["Monaco", "San Marino", "Vatican City", "Liechtenstein"],
+      "correct_index": 2,
+      "category": "geography"
     },
     {
       "id": 10,
-      "text": "Which trait must a type implement to be usable in a 'for' loop?",
-      "options": ["Iterator", "IntoIterator", "Iterable", "Loop"],
+      "text": "How many days are there in a leap year?",
+      "options": ["365", "366", "364", "367"],
       "correct_index": 1,
-      "category": "rust"
+      "category": "general_knowledge"
     },
     {
       "id": 11,
-      "text": "What does the '?' operator do in Rust?",
-      "options": ["Null check", "Early return on error", "Optional unwrap", "Ternary conditional"],
+      "text": "Which desert is the largest hot desert in the world?",
+      "options": ["Gobi", "Sahara", "Kalahari", "Arabian"],
       "correct_index": 1,
-      "category": "rust"
+      "category": "geography"
     },
     {
       "id": 12,
-      "text": "Which of these is a valid Rust macro invocation?",
-      "options": ["println()", "println[]", "println!", "println#"],
-      "correct_index": 2,
-      "category": "rust"
+      "text": "What gas do plants absorb from the atmosphere?",
+      "options": ["Oxygen", "Carbon Dioxide", "Nitrogen", "Hydrogen"],
+      "correct_index": 1,
+      "category": "general_knowledge"
     },
     {
       "id": 13,
-      "text": "What is the purpose of 'lifetime annotations' in Rust?",
-      "options": ["Memory profiling", "Garbage collection", "Reference validity tracking", "Performance optimization"],
-      "correct_index": 2,
-      "category": "rust"
+      "text": "Which country has the highest population in the world?",
+      "options": ["India", "China", "USA", "Indonesia"],
+      "correct_index": 0,
+      "category": "geography"
     },
     {
       "id": 14,
-      "text": "Which keyword is used to create a thread in Rust?",
-      "options": ["thread::new()", "spawn()", "thread::spawn()", "create_thread()"],
+      "text": "How many continents are there on Earth?",
+      "options": ["5", "6", "7", "8"],
       "correct_index": 2,
-      "category": "rust"
+      "category": "general_knowledge"
     },
     {
       "id": 15,
-      "text": "What does 'unsafe' allow in Rust?",
-      "options": ["Skip compiler checks entirely", "Dereference raw pointers", "Ignore all warnings", "Disable borrow checker"],
+      "text": "Which river is the longest in the world?",
+      "options": ["Amazon", "Nile", "Yangtze", "Congo"],
       "correct_index": 1,
-      "category": "rust"
+      "category": "geography"
     },
     {
       "id": 16,
-      "text": "Which data structure is Rust's 'Vec' most similar to?",
-      "options": ["Linked list", "Dynamic array", "Hash map", "Binary tree"],
-      "correct_index": 1,
-      "category": "rust"
+      "text": "What is the hardest natural substance on Earth?",
+      "options": ["Gold", "Iron", "Diamond", "Quartz"],
+      "correct_index": 2,
+      "category": "general_knowledge"
     },
     {
       "id": 17,
-      "text": "What does 'impl Trait' syntax represent?",
-      "options": ["Interface implementation", "Anonymous type", "Trait object", "Generic constraint"],
+      "text": "Which country is known as the Land of the Rising Sun?",
+      "options": ["China", "Japan", "South Korea", "Thailand"],
       "correct_index": 1,
-      "category": "rust"
+      "category": "geography"
     },
     {
       "id": 18,
-      "text": "Which is the correct way to create a mutable reference?",
-      "options": ["&x", "&mut x", "*mut x", "mut &x"],
-      "correct_index": 1,
-      "category": "rust"
+      "text": "How many hours are there in two days?",
+      "options": ["24", "36", "48", "72"],
+      "correct_index": 2,
+      "category": "general_knowledge"
     },
     {
       "id": 19,
-      "text": "What is Rust's equivalent of a null pointer?",
-      "options": ["null", "nil", "None", "Nothing"],
+      "text": "Which ocean borders the east coast of Africa?",
+      "options": ["Atlantic Ocean", "Pacific Ocean", "Indian Ocean", "Arctic Ocean"],
       "correct_index": 2,
-      "category": "rust"
+      "category": "geography"
     },
     {
       "id": 20,
-      "text": "Which crate is commonly used for serialization in Rust?",
-      "options": ["serde", "serialize", "json", "encode"],
-      "correct_index": 0,
-      "category": "rust"
+      "text": "What is the chemical symbol for gold?",
+      "options": ["Ag", "Au", "Gd", "Go"],
+      "correct_index": 1,
+      "category": "general_knowledge"
     },
     {
       "id": 21,
-      "text": "What year did Tim Berners-Lee invent the World Wide Web?",
-      "options": ["1989", "1991", "1993", "1995"],
-      "correct_index": 0,
-      "category": "history"
+      "text": "Which country has the largest land area?",
+      "options": ["Canada", "China", "USA", "Russia"],
+      "correct_index": 3,
+      "category": "geography"
     },
     {
       "id": 22,
-      "text": "Which planet is known as the Red Planet?",
-      "options": ["Venus", "Mars", "Jupiter", "Saturn"],
+      "text": "How many legs does a spider have?",
+      "options": ["6", "8", "10", "12"],
       "correct_index": 1,
-      "category": "science"
+      "category": "general_knowledge"
     },
     {
       "id": 23,
-      "text": "What is the capital of Australia?",
-      "options": ["Sydney", "Melbourne", "Canberra", "Perth"],
+      "text": "Which African country has the largest population?",
+      "options": ["Kenya", "Ethiopia", "Nigeria", "Egypt"],
       "correct_index": 2,
       "category": "geography"
     },
     {
       "id": 24,
-      "text": "Who wrote '1984'?",
-      "options": ["Aldous Huxley", "George Orwell", "Ray Bradbury", "Isaac Asimov"],
+      "text": "What do bees collect from flowers?",
+      "options": ["Water", "Pollen", "Seeds", "Leaves"],
       "correct_index": 1,
-      "category": "literature"
+      "category": "general_knowledge"
     },
     {
       "id": 25,
-      "text": "What is the chemical symbol for gold?",
-      "options": ["Go", "Gd", "Au", "Ag"],
+      "text": "Which country is famous for the Eiffel Tower?",
+      "options": ["Italy", "France", "Spain", "Germany"],
+      "correct_index": 1,
+      "category": "geography"
+    },
+    {
+      "id": 26,
+      "text": "How many minutes are in one hour?",
+      "options": ["30", "45", "60", "90"],
       "correct_index": 2,
-      "category": "science"
+      "category": "general_knowledge"
+    },
+    {
+      "id": 27,
+      "text": "Which continent is Australia located on?",
+      "options": ["Europe", "Asia", "Oceania", "Africa"],
+      "correct_index": 2,
+      "category": "geography"
+    },
+    {
+      "id": 28,
+      "text": "What instrument is used to measure temperature?",
+      "options": ["Barometer", "Thermometer", "Hygrometer", "Altimeter"],
+      "correct_index": 1,
+      "category": "general_knowledge"
+    },
+    {
+      "id": 29,
+      "text": "Which country borders Tanzania to the north?",
+      "options": ["Mozambique", "Zambia", "Kenya", "Malawi"],
+      "correct_index": 2,
+      "category": "geography"
+    },
+    {
+      "id": 30,
+      "text": "What is the main source of energy for Earth?",
+      "options": ["The Moon", "The Sun", "Wind", "Water"],
+      "correct_index": 1,
+      "category": "general_knowledge"
+    },
+    {
+      "id": 31,
+      "text": "Which sea separates Africa and Europe?",
+      "options": ["Red Sea", "Black Sea", "Mediterranean Sea", "Caspian Sea"],
+      "correct_index": 2,
+      "category": "geography"
+    },
+    {
+      "id": 32,
+      "text": "What shape has three sides?",
+      "options": ["Square", "Rectangle", "Triangle", "Circle"],
+      "correct_index": 2,
+      "category": "general_knowledge"
+    },
+    {
+      "id": 33,
+      "text": "Which country uses the Yen as its currency?",
+      "options": ["China", "Japan", "South Korea", "Thailand"],
+      "correct_index": 1,
+      "category": "geography"
+    },
+    {
+      "id": 34,
+      "text": "What do humans breathe in to survive?",
+      "options": ["Carbon Dioxide", "Oxygen", "Nitrogen", "Hydrogen"],
+      "correct_index": 1,
+      "category": "general_knowledge"
+    },
+    {
+      "id": 35,
+      "text": "Which is the coldest continent?",
+      "options": ["Europe", "Asia", "Antarctica", "North America"],
+      "correct_index": 2,
+      "category": "geography"
+    },
+    {
+      "id": 36,
+      "text": "How many colors are there in a rainbow?",
+      "options": ["5", "6", "7", "8"],
+      "correct_index": 2,
+      "category": "general_knowledge"
+    },
+    {
+      "id": 37,
+      "text": "Which country is home to the Great Wall?",
+      "options": ["India", "China", "Mongolia", "Japan"],
+      "correct_index": 1,
+      "category": "geography"
+    },
+    {
+      "id": 38,
+      "text": "Which animal is known as the King of the Jungle?",
+      "options": ["Tiger", "Elephant", "Lion", "Leopard"],
+      "correct_index": 2,
+      "category": "general_knowledge"
+    },
+    {
+      "id": 39,
+      "text": "Which African lake is the largest by surface area?",
+      "options": ["Lake Tanganyika", "Lake Malawi", "Lake Victoria", "Lake Turkana"],
+      "correct_index": 2,
+      "category": "geography"
+    },
+    {
+      "id": 40,
+      "text": "What planet is closest to the Sun?",
+      "options": ["Venus", "Earth", "Mars", "Mercury"],
+      "correct_index": 3,
+      "category": "general_knowledge"
+    },
+    {
+      "id": 41,
+      "text": "Which country has Rome as its capital?",
+      "options": ["Spain", "Italy", "France", "Greece"],
+      "correct_index": 1,
+      "category": "geography"
+    },
+    {
+      "id": 42,
+      "text": "How many seconds are in one minute?",
+      "options": ["30", "45", "60", "90"],
+      "correct_index": 2,
+      "category": "general_knowledge"
+    },
+    {
+      "id": 43,
+      "text": "Which country is known for pyramids?",
+      "options": ["Mexico", "Peru", "Egypt", "India"],
+      "correct_index": 2,
+      "category": "geography"
+    },
+    {
+      "id": 44,
+      "text": "What do cows drink?",
+      "options": ["Milk", "Water", "Juice", "Grass"],
+      "correct_index": 1,
+      "category": "general_knowledge"
+    },
+    {
+      "id": 45,
+      "text": "Which continent is the Sahara Desert located in?",
+      "options": ["Asia", "Australia", "Africa", "South America"],
+      "correct_index": 2,
+      "category": "geography"
+    },
+    {
+      "id": 46,
+      "text": "Which sense organ is used to see?",
+      "options": ["Ear", "Nose", "Eye", "Skin"],
+      "correct_index": 2,
+      "category": "general_knowledge"
+    },
+    {
+      "id": 47,
+      "text": "Which country has Berlin as its capital?",
+      "options": ["Austria", "Germany", "Poland", "Netherlands"],
+      "correct_index": 1,
+      "category": "geography"
+    },
+    {
+      "id": 48,
+      "text": "What is H2O commonly known as?",
+      "options": ["Salt", "Oxygen", "Water", "Hydrogen"],
+      "correct_index": 2,
+      "category": "general_knowledge"
+    },
+    {
+      "id": 49,
+      "text": "Which country is directly south of Tanzania?",
+      "options": ["Kenya", "Uganda", "Mozambique", "Rwanda"],
+      "correct_index": 2,
+      "category": "geography"
+    },
+    {
+      "id": 50,
+      "text": "Which month has the fewest days?",
+      "options": ["January", "February", "March", "April"],
+      "correct_index": 1,
+      "category": "general_knowledge"
     }
   ]
+
 }
