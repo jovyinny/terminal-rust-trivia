@@ -109,7 +109,7 @@ async fn broadcast_to_players(
 }
 
 async fn game_loop(mut game_rx: mpsc::Receiver<GameEvent>) -> Result<()> {
-    let questions = match QuestionBank::load_or_fetch("questions.json", 10).await {
+    let questions = match QuestionBank::load_or_fetch("question.json", 10).await {
         Ok(bank) => bank.select_questions(10),
         Err(e) => {
             error!("❌ Failed to load questions: {}", e);

@@ -39,7 +39,8 @@ struct OpenTriviaQuestion {
 impl QuestionBank {
     pub fn load_from_file<P: AsRef<Path>>(path: P) -> Result<Self> {
         let content = std::fs::read_to_string(path)?;
-        let bank: QuestionBank = serde_json::from_str(&content)?;
+        let mut bank: QuestionBank = serde_json::from_str(&content)?;
+        bank.shuffle();
         Ok(bank)
     }
     
@@ -54,14 +55,16 @@ impl QuestionBank {
                 tracing::warn!("⚠️  Local questions file not found: {}", e);
                 tracing::info!("🌐 Attempting to fetch questions from Open Trivia Database...");
 
-                Self::fetch_from_api(count).await
+                let mut bank = Self::fetch_from_api(count).await?;
+                bank.shuffle();
+                Ok(bank)
             }
         }
     }
 
     async fn fetch_from_api(count: usize) -> Result<Self> {
         let url = format!(
-            "https://opentdb.com/api.php?amount={}&type=multiple",
+            "https://opentdb.com/api.php?amount={}&type=multiple&category=27",
             count
         );
 
@@ -139,5 +142,14 @@ impl QuestionBank {
         let mut questions = self.questions.clone();
         questions.shuffle(&mut rng);
         questions.into_iter().take(count).collect()
+    }
+
+    /// Shuffles the questions in the bank in-place
+    pub fn shuffle(&mut self) {
+        use rand::seq::SliceRandom;
+        use rand::thread_rng;
+
+        let mut rng = thread_rng();
+        self.questions.shuffle(&mut rng);
     }
 }
