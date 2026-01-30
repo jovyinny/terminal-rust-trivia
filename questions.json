@@ -1,0 +1,179 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "text": "What year was Rust 1.0 officially released?",
+      "options": ["2013", "2015", "2017", "2019"],
+      "correct_index": 1,
+      "category": "rust"
+    },
+    {
+      "id": 2,
+      "text": "Which company primarily sponsors Rust development?",
+      "options": ["Google", "Mozilla", "Microsoft", "Amazon"],
+      "correct_index": 1,
+      "category": "rust"
+    },
+    {
+      "id": 3,
+      "text": "What is Rust's package manager called?",
+      "options": ["npm", "pip", "cargo", "gem"],
+      "correct_index": 2,
+      "category": "rust"
+    },
+    {
+      "id": 4,
+      "text": "Which keyword is used to define immutable variables in Rust?",
+      "options": ["var", "let", "const", "val"],
+      "correct_index": 1,
+      "category": "rust"
+    },
+    {
+      "id": 5,
+      "text": "What is the name of Rust's documentation generator?",
+      "options": ["rustdoc", "docgen", "rdoc", "rustbook"],
+      "correct_index": 0,
+      "category": "rust"
+    },
+    {
+      "id": 6,
+      "text": "Which async runtime is most commonly used in Rust?",
+      "options": ["async-std", "tokio", "smol", "actix"],
+      "correct_index": 1,
+      "category": "rust"
+    },
+    {
+      "id": 7,
+      "text": "What does 'RAII' stand for in systems programming?",
+      "options": ["Resource Allocation Is Initialization", "Random Access In Iteration", "Recursive Algorithm Implementation", "Runtime Assertion and Inspection"],
+      "correct_index": 0,
+      "category": "programming"
+    },
+    {
+      "id": 8,
+      "text": "Which of these is NOT a Rust ownership rule?",
+      "options": ["Each value has an owner", "There can be multiple owners", "When the owner goes out of scope, the value is dropped", "There can only be one owner at a time"],
+      "correct_index": 1,
+      "category": "rust"
+    },
+    {
+      "id": 9,
+      "text": "What is the default integer type in Rust?",
+      "options": ["i32", "i64", "u32", "isize"],
+      "correct_index": 0,
+      "category": "rust"
+    },
+    {
+      "id": 10,
+      "text": "Which trait must a type implement to be usable in a 'for' loop?",
+      "options": ["Iterator", "IntoIterator", "Iterable", "Loop"],
+      "correct_index": 1,
+      "category": "rust"
+    },
+    {
+      "id": 11,
+      "text": "What does the '?' operator do in Rust?",
+      "options": ["Null check", "Early return on error", "Optional unwrap", "Ternary conditional"],
+      "correct_index": 1,
+      "category": "rust"
+    },
+    {
+      "id": 12,
+      "text": "Which of these is a valid Rust macro invocation?",
+      "options": ["println()", "println[]", "println!", "println#"],
+      "correct_index": 2,
+      "category": "rust"
+    },
+    {
+      "id": 13,
+      "text": "What is the purpose of 'lifetime annotations' in Rust?",
+      "options": ["Memory profiling", "Garbage collection", "Reference validity tracking", "Performance optimization"],
+      "correct_index": 2,
+      "category": "rust"
+    },
+    {
+      "id": 14,
+      "text": "Which keyword is used to create a thread in Rust?",
+      "options": ["thread::new()", "spawn()", "thread::spawn()", "create_thread()"],
+      "correct_index": 2,
+      "category": "rust"
+    },
+    {
+      "id": 15,
+      "text": "What does 'unsafe' allow in Rust?",
+      "options": ["Skip compiler checks entirely", "Dereference raw pointers", "Ignore all warnings", "Disable borrow checker"],
+      "correct_index": 1,
+      "category": "rust"
+    },
+    {
+      "id": 16,
+      "text": "Which data structure is Rust's 'Vec' most similar to?",
+      "options": ["Linked list", "Dynamic array", "Hash map", "Binary tree"],
+      "correct_index": 1,
+      "category": "rust"
+    },
+    {
+      "id": 17,
+      "text": "What does 'impl Trait' syntax represent?",
+      "options": ["Interface implementation", "Anonymous type", "Trait object", "Generic constraint"],
+      "correct_index": 1,
+      "category": "rust"
+    },
+    {
+      "id": 18,
+      "text": "Which is the correct way to create a mutable reference?",
+      "options": ["&x", "&mut x", "*mut x", "mut &x"],
+      "correct_index": 1,
+      "category": "rust"
+    },
+    {
+      "id": 19,
+      "text": "What is Rust's equivalent of a null pointer?",
+      "options": ["null", "nil", "None", "Nothing"],
+      "correct_index": 2,
+      "category": "rust"
+    },
+    {
+      "id": 20,
+      "text": "Which crate is commonly used for serialization in Rust?",
+      "options": ["serde", "serialize", "json", "encode"],
+      "correct_index": 0,
+      "category": "rust"
+    },
+    {
+      "id": 21,
+      "text": "What year did Tim Berners-Lee invent the World Wide Web?",
+      "options": ["1989", "1991", "1993", "1995"],
+      "correct_index": 0,
+      "category": "history"
+    },
+    {
+      "id": 22,
+      "text": "Which planet is known as the Red Planet?",
+      "options": ["Venus", "Mars", "Jupiter", "Saturn"],
+      "correct_index": 1,
+      "category": "science"
+    },
+    {
+      "id": 23,
+      "text": "What is the capital of Australia?",
+      "options": ["Sydney", "Melbourne", "Canberra", "Perth"],
+      "correct_index": 2,
+      "category": "geography"
+    },
+    {
+      "id": 24,
+      "text": "Who wrote '1984'?",
+      "options": ["Aldous Huxley", "George Orwell", "Ray Bradbury", "Isaac Asimov"],
+      "correct_index": 1,
+      "category": "literature"
+    },
+    {
+      "id": 25,
+      "text": "What is the chemical symbol for gold?",
+      "options": ["Go", "Gd", "Au", "Ag"],
+      "correct_index": 2,
+      "category": "science"
+    }
+  ]
+}
