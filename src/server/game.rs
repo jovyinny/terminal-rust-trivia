@@ -1,6 +1,6 @@
-use crate::protocol::*;
-use crate::server::questions::Question;
-use crate::server::scoring;
+use rust_rush_trivia::protocol::*;
+use crate::questions::Question;
+use crate::scoring;
 use std::collections::HashMap;
 use std::time::Instant;
 
@@ -187,7 +187,7 @@ impl Game {
     }
     
     pub fn get_game_stats(&self) -> GameStats {
-        let mut fastest_answer: Option<(String, f64)> = None;
+        let fastest_answer: Option<(String, f64)> = None;
         let mut longest_streak: Option<(String, u32)> = None;
         let mut perfect_score: Vec<String> = Vec::new();
         

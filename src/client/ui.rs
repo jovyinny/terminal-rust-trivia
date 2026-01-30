@@ -1,15 +1,14 @@
-use crate::client::state::{ClientData, ClientState};
-use crate::protocol::*;
+use crate::state::{ClientData, ClientState};
+use rust_rush_trivia::protocol::*;
 use ratatui::{
-    backend::Backend,
     layout::{Alignment, Constraint, Direction, Layout, Rect},
     style::{Color, Modifier, Style},
-    text::{Line, Span, Text},
+    text::{Line, Span},
     widgets::{Block, Borders, List, ListItem, Paragraph, Wrap},
     Frame,
 };
 
-pub fn render_ui<B: Backend>(f: &mut Frame, client: &ClientData) {
+pub fn render_ui(f: &mut Frame, client: &ClientData) {
     let chunks = Layout::default()
         .direction(Direction::Vertical)
         .constraints([
@@ -43,8 +42,8 @@ pub fn render_ui<B: Backend>(f: &mut Frame, client: &ClientData) {
     render_footer(f, chunks[2], &client.state);
 }
 
-fn render_header<B: Backend>(f: &mut Frame, area: Rect, client: &ClientData) {
-    let title = if let Some(id) = &client.player_id {
+fn render_header(f: &mut Frame, area: Rect, client: &ClientData) {
+    let title = if let Some(_id) = &client.player_id {
         format!("🎮 Rust Rush Trivia - Player: {} ", client.player_name)
     } else {
         "🎮 Rust Rush Trivia - Connecting...".to_string()
@@ -59,7 +58,7 @@ fn render_header<B: Backend>(f: &mut Frame, area: Rect, client: &ClientData) {
     f.render_widget(paragraph, area);
 }
 
-fn render_footer<B: Backend>(f: &mut Frame, area: Rect, state: &ClientState) {
+fn render_footer(f: &mut Frame, area: Rect, state: &ClientState) {
     let help_text = match state {
         ClientState::Question { answered: false, .. } => "Press 1-4 to answer | ESC to quit",
         ClientState::Lobby(_) => "Waiting for game to start... | ESC to quit",
@@ -77,7 +76,7 @@ fn render_footer<B: Backend>(f: &mut Frame, area: Rect, state: &ClientState) {
     f.render_widget(paragraph, area);
 }
 
-fn render_connecting<B: Backend>(f: &mut Frame, area: Rect) {
+fn render_connecting(f: &mut Frame, area: Rect) {
     let text = vec![
         Line::from(""),
         Line::from("Connecting to server..."),
@@ -91,7 +90,7 @@ fn render_connecting<B: Backend>(f: &mut Frame, area: Rect) {
     f.render_widget(paragraph, area);
 }
 
-fn render_lobby<B: Backend>(f: &mut Frame, area: Rect, players: &[PlayerInfo]) {
+fn render_lobby(f: &mut Frame, area: Rect, players: &[PlayerInfo]) {
     let mut items: Vec<ListItem> = players.iter()
         .map(|p| {
             let content = format!("👤 {}", p.name);
@@ -111,7 +110,7 @@ fn render_lobby<B: Backend>(f: &mut Frame, area: Rect, players: &[PlayerInfo]) {
     f.render_widget(list, area);
 }
 
-fn render_waiting_for_game<B: Backend>(f: &mut Frame, area: Rect) {
+fn render_waiting_for_game(f: &mut Frame, area: Rect) {
     let text = vec![
         Line::from(""),
         Line::from(Span::styled("Game Starting Soon!", Style::default().fg(Color::Yellow).add_modifier(Modifier::BOLD))),
@@ -126,7 +125,7 @@ fn render_waiting_for_game<B: Backend>(f: &mut Frame, area: Rect) {
     f.render_widget(paragraph, area);
 }
 
-fn render_question<B: Backend>(
+fn render_question(
     f: &mut Frame,
     area: Rect,
     number: u32,
@@ -204,7 +203,7 @@ fn render_question<B: Backend>(
     f.render_widget(options_list, chunks[2]);
 }
 
-fn render_question_result<B: Backend>(
+fn render_question_result(
     f: &mut Frame,
     area: Rect,
     correct_index: u8,
@@ -260,7 +259,7 @@ fn render_question_result<B: Backend>(
     render_leaderboard_widget(f, chunks[2], leaderboard, my_player_id);
 }
 
-fn render_leaderboard_widget<B: Backend>(
+fn render_leaderboard_widget(
     f: &mut Frame,
     area: Rect,
     leaderboard: &[LeaderboardEntry],
@@ -305,7 +304,7 @@ fn render_leaderboard_widget<B: Backend>(
     f.render_widget(leaderboard_list, area);
 }
 
-fn render_game_end<B: Backend>(
+fn render_game_end(
     f: &mut Frame,
     area: Rect,
     leaderboard: &[LeaderboardEntry],
@@ -352,7 +351,7 @@ fn render_game_end<B: Backend>(
     f.render_widget(stats_para, chunks[2]);
 }
 
-fn render_error<B: Backend>(f: &mut Frame, area: Rect, message: &str) {
+fn render_error(f: &mut Frame, area: Rect, message: &str) {
     let text = vec![
         Line::from(""),
         Line::from(Span::styled("❌ Error", Style::default().fg(Color::Red).add_modifier(Modifier::BOLD))),

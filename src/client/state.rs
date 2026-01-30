@@ -1,4 +1,4 @@
-use crate::protocol::*;
+use rust_rush_trivia::protocol::*;
 
 #[derive(Debug, Clone)]
 pub enum ClientState {

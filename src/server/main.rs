@@ -9,11 +9,9 @@ use rust_rush_trivia::protocol::*;
 use rust_rush_trivia::{read_message, write_message};
 use std::collections::HashMap;
 use std::net::SocketAddr;
-use std::sync::Arc;
-use tokio::io::{AsyncReadExt, AsyncWriteExt};
 use tokio::net::{TcpListener, TcpStream};
-use tokio::sync::{broadcast, mpsc};
-use tokio::time::{sleep, Duration, Instant};
+use tokio::sync::mpsc;
+use tokio::time::{sleep, Duration};
 use tracing::{error, info, warn};
 
 type PlayerId = String;
@@ -76,7 +74,7 @@ async fn handle_client(
     // Receive messages from client
     loop {
         match read_message::<_, ClientMessage>(&mut read_half).await {
-            Ok(ClientMessage::Answer { question_number, choice_index, .. }) => {
+            Ok(ClientMessage::Answer { question_number: _, choice_index, .. }) => {
                 game_tx.send(GameEvent::PlayerAnswer(player_id.clone(), choice_index)).await?;
             }
             Ok(ClientMessage::Disconnect) => {
@@ -123,18 +121,8 @@ async fn game_loop(mut game_rx: mpsc::Receiver<GameEvent>) -> Result<()> {
     info!("Press Ctrl+C to start the game once enough players have joined.");
     
     let mut game_started = false;
-    let mut auto_start_timer = Instant::now();
-    
+
     loop {
-        // Check if we should auto-start after 30 seconds in lobby
-        if !game_started && game.state == GameState::Lobby {
-            if auto_start_timer.elapsed() > Duration::from_secs(30) && game.players.len() >= 2 {
-                info!("Auto-starting game after 30 seconds...");
-                game_rx.try_recv().ok(); // Clear any pending events
-                game_rx.send(GameEvent::StartGame).await?;
-            }
-        }
-        
         tokio::select! {
             Some(event) = game_rx.recv() => {
                 match event {
@@ -193,12 +181,14 @@ async fn game_loop(mut game_rx: mpsc::Receiver<GameEvent>) -> Result<()> {
                             
                             // Start first question
                             if let Some(question) = game.get_current_question() {
+                                let question_text = question.text.clone();
+                                let question_options = question.options.clone();
                                 game.start_question();
                                 broadcast_to_players(&player_channels, ServerMessage::Question {
                                     number: 1,
                                     total: game.total_questions,
-                                    text: question.text.clone(),
-                                    options: question.options.clone(),
+                                    text: question_text,
+                                    options: question_options,
                                     time_limit: 15,
                                 }).await;
                             }
@@ -246,12 +236,14 @@ async fn game_loop(mut game_rx: mpsc::Receiver<GameEvent>) -> Result<()> {
                             
                             if let GameState::Question(next_num) = game.state {
                                 if let Some(question) = game.get_current_question() {
+                                    let question_text = question.text.clone();
+                                    let question_options = question.options.clone();
                                     game.start_question();
                                     broadcast_to_players(&player_channels, ServerMessage::Question {
                                         number: next_num,
                                         total: game.total_questions,
-                                        text: question.text.clone(),
-                                        options: question.options.clone(),
+                                        text: question_text,
+                                        options: question_options,
                                         time_limit: 15,
                                     }).await;
                                 }
@@ -302,7 +294,6 @@ async fn main() -> Result<()> {
     let (game_tx, game_rx) = mpsc::channel::<GameEvent>(100);
     
     // Spawn game loop
-    let game_tx_clone = game_tx.clone();
     tokio::spawn(async move {
         if let Err(e) = game_loop(game_rx).await {
             error!("Game loop error: {}", e);

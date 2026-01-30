@@ -14,6 +14,7 @@ use state::{ClientData, ClientState};
 use std::io;
 use std::time::Duration;
 use tokio::net::TcpStream;
+use tokio::net::tcp::{OwnedReadHalf, OwnedWriteHalf};
 use tokio::sync::mpsc;
 use tracing::error;
 
@@ -24,11 +25,11 @@ enum AppEvent {
 }
 
 async fn network_task(
-    mut stream: TcpStream,
+    mut read_half: OwnedReadHalf,
     tx: mpsc::Sender<AppEvent>,
 ) -> Result<()> {
     loop {
-        match read_message::<_, ServerMessage>(&mut stream).await {
+        match read_message::<_, ServerMessage>(&mut read_half).await {
             Ok(msg) => {
                 if tx.send(AppEvent::ServerMessage(msg)).await.is_err() {
                     break;
@@ -43,8 +44,8 @@ async fn network_task(
     Ok(())
 }
 
-async fn send_message(stream: &mut TcpStream, msg: ClientMessage) -> Result<()> {
-    write_message(stream, &msg).await
+async fn send_message(write_half: &mut OwnedWriteHalf, msg: ClientMessage) -> Result<()> {
+    write_message(write_half, &msg).await
 }
 
 #[tokio::main]
@@ -64,10 +65,13 @@ async fn main() -> Result<()> {
     println!("Connecting to {} as '{}'...", server_addr, player_name);
     
     // Connect to server
-    let mut stream = TcpStream::connect(server_addr).await?;
-    
+    let stream = TcpStream::connect(server_addr).await?;
+
+    // Split stream into read and write halves
+    let (read_half, mut write_half) = stream.into_split();
+
     // Send join message
-    send_message(&mut stream, ClientMessage::Join {
+    send_message(&mut write_half, ClientMessage::Join {
         player_name: player_name.clone(),
     }).await?;
     
@@ -88,9 +92,8 @@ async fn main() -> Result<()> {
     
     // Spawn network task
     let tx_clone = tx.clone();
-    let stream_clone = stream.try_clone().await?;
     tokio::spawn(async move {
-        if let Err(e) = network_task(stream_clone, tx_clone).await {
+        if let Err(e) = network_task(read_half, tx_clone).await {
             error!("Network task error: {}", e);
         }
     });
@@ -141,7 +144,7 @@ async fn main() -> Result<()> {
                     match key {
                         KeyCode::Esc => {
                             should_quit = true;
-                            let _ = send_message(&mut stream, ClientMessage::Disconnect).await;
+                            let _ = send_message(&mut write_half, ClientMessage::Disconnect).await;
                         }
                         
                         KeyCode::Char('1') | KeyCode::Char('2') | KeyCode::Char('3') | KeyCode::Char('4') => {
@@ -162,7 +165,7 @@ async fn main() -> Result<()> {
                                     .unwrap()
                                     .as_secs_f64();
                                 
-                                let _ = send_message(&mut stream, ClientMessage::Answer {
+                                let _ = send_message(&mut write_half, ClientMessage::Answer {
                                     question_number,
                                     choice_index: choice,
                                     timestamp,
