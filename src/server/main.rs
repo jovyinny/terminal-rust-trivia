@@ -109,9 +109,15 @@ async fn broadcast_to_players(
 }
 
 async fn game_loop(mut game_rx: mpsc::Receiver<GameEvent>) -> Result<()> {
-    let questions = QuestionBank::load_from_file("questions.json")?
-        .select_questions(10);
-    
+    let questions = match QuestionBank::load_or_fetch("question.json", 10).await {
+        Ok(bank) => bank.select_questions(10),
+        Err(e) => {
+            error!("❌ Failed to load questions: {}", e);
+            error!("Unable to start game. Shutting down server...");
+            std::process::exit(1);
+        }
+    };
+
     info!("Loaded {} questions for the game", questions.len());
     
     let mut game = Game::new(questions);

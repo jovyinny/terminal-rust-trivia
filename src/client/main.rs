@@ -53,13 +53,20 @@ async fn main() -> Result<()> {
     println!("🎮 Rust Rush Trivia Client");
     println!("==========================\n");
 
-    // Prompt for server address
-    print!("Enter server address (e.g., 192.168.1.100:8080): ");
+    // Prompt for server address with default
+    print!("Enter server address [default: localhost:8080]: ");
     std::io::Write::flush(&mut std::io::stdout())?;
 
     let mut server_addr = String::new();
     std::io::stdin().read_line(&mut server_addr)?;
     let server_addr = server_addr.trim();
+
+    // Use default if empty
+    let server_addr = if server_addr.is_empty() {
+        "localhost:8080"
+    } else {
+        server_addr
+    };
 
     // Prompt for player name
     print!("Enter your name: ");
@@ -69,26 +76,57 @@ async fn main() -> Result<()> {
     std::io::stdin().read_line(&mut player_name)?;
     let player_name = player_name.trim().to_string();
 
-    if server_addr.is_empty() || player_name.is_empty() {
-        eprintln!("Server address and player name are required!");
+    if player_name.is_empty() {
+        eprintln!("❌ Player name is required!");
         std::process::exit(1);
     }
 
-    println!("\nConnecting to {} as '{}'...", server_addr, player_name);
-    
-    // Connect to server
-    let stream = TcpStream::connect(server_addr).await?;
+    println!("\n🔌 Connecting to {} as '{}'...", server_addr, player_name);
+
+    // Connect to server with timeout
+    let stream = match tokio::time::timeout(
+        Duration::from_secs(10),
+        TcpStream::connect(server_addr)
+    ).await {
+        Ok(Ok(stream)) => {
+            println!("✅ Connected successfully!");
+            stream
+        }
+        Ok(Err(e)) => {
+            eprintln!("\n❌ Failed to connect to server: {}", e);
+            eprintln!("\nPossible reasons:");
+            eprintln!("  • Server is not running");
+            eprintln!("  • Wrong server address or port");
+            eprintln!("  • Firewall blocking the connection");
+            eprintln!("\nPlease check the server address and try again.");
+            std::process::exit(1);
+        }
+        Err(_) => {
+            eprintln!("\n❌ Connection timed out after 10 seconds");
+            eprintln!("\nPossible reasons:");
+            eprintln!("  • Server is not reachable");
+            eprintln!("  • Network issues");
+            eprintln!("  • Wrong server address");
+            eprintln!("\nPlease check your connection and try again.");
+            std::process::exit(1);
+        }
+    };
 
     // Split stream into read and write halves
     let (read_half, mut write_half) = stream.into_split();
 
     // Send join message
-    send_message(&mut write_half, ClientMessage::Join {
+    if let Err(e) = send_message(&mut write_half, ClientMessage::Join {
         player_name: player_name.clone(),
-    }).await?;
-    
-    println!("Connected! Starting UI...");
-    
+    }).await {
+        eprintln!("\n❌ Failed to send join request: {}", e);
+        eprintln!("The connection may have been lost.");
+        std::process::exit(1);
+    }
+
+    println!("📨 Join request sent, waiting for server response...");
+    println!("🎨 Starting UI...\n");
+
     // Setup terminal
     enable_raw_mode()?;
     let mut stdout = io::stdout();
